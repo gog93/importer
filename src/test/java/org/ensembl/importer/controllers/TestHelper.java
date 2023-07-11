@@ -121,6 +121,7 @@ public class TestHelper {
                 .build();
 
     }
+
     public Study study2() {
         Study study;
         return study = Study.builder()
@@ -188,7 +189,7 @@ public class TestHelper {
 
     public Gene gene() {
         Gene gene;
-        return  gene = Gene.builder()
+        return gene = Gene.builder()
                 .id(1)
                 .name("Example Gene")
                 .createdAt(LocalDateTime.now())
@@ -236,6 +237,7 @@ public class TestHelper {
                 .build();
 
     }
+
     public Patient patient2() {
         Patient patient;
         return patient = Patient.builder()
@@ -277,7 +279,7 @@ public class TestHelper {
 
     public Disease disease3() {
         Disease disease;
-        return  disease = Disease.builder()
+        return disease = Disease.builder()
                 .id(1L)
                 .name("Example Disease")
                 .abbreviation("ED")
@@ -287,9 +289,11 @@ public class TestHelper {
                 .parent(null) // Set the parent disease object
                 .build();
 
-    } public Disease disease() {
+    }
+
+    public Disease disease() {
         Disease disease;
-        return  disease = Disease.builder()
+        return disease = Disease.builder()
                 .id(3L)
                 .name("Example Disease")
                 .abbreviation("ED")
@@ -300,23 +304,24 @@ public class TestHelper {
                 .build();
 
     }
+
     public Disease disease2() {
         Disease disease;
-        return  disease = Disease.builder()
+        return disease = Disease.builder()
                 .id(2L)
                 .name("Example Disease2")
                 .abbreviation("ED")
                 .launched(true)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .parent(disease3()) // Set the parent disease object
+                .parent(disease()) // Set the parent disease object
                 .build();
 
     }
 
     public Family family() {
         Family family;
-        return  family = Family.builder()
+        return family = Family.builder()
                 .id(1L)
                 .name("Example Family")
                 .history(true)
@@ -372,9 +377,10 @@ public class TestHelper {
                 .build();
 
     }
-    public FileUpload fileUpload(){
+
+    public FileUpload fileUpload() {
         FileUpload fileUpload;
-        return  fileUpload = FileUpload.builder()
+        return fileUpload = FileUpload.builder()
                 .id(1L)
                 .tsvFileFileName("example.tsv")
                 .tsvFileContentType("text/tab-separated-values")
@@ -387,22 +393,26 @@ public class TestHelper {
                 .build();
 
     }
+
     public Map<Long, Long> createPatientsMap() {
         Map<Long, Long> patientsMap = new HashMap<>();
         patientsMap.put(1L, 1L);
         return patientsMap;
     }
+
     public Map<Long, Long> createStudyMap() {
         Map<Long, Long> studyMap = new HashMap<>();
         studyMap.put(1L, 1L);
         studyMap.put(2L, 2L);
         return studyMap;
     }
+
     public Map<Long, Long> createStudiesMap() {
         Map<Long, Long> studiesMap = new HashMap<>();
         studiesMap.put(1L, 1L);
         return studiesMap;
     }
+
     public Map<Long, Long> createDiseaseMap() {
         Map<Long, Long> diseaseMap = new HashMap<>();
         diseaseMap.put(1L, 1L);
@@ -416,6 +426,7 @@ public class TestHelper {
         fileUploadMap.put(2L, 2L);
         return fileUploadMap;
     }
+
     public Map<Long, Long> createUserMap() {
         Map<Long, Long> userMap = new HashMap<>();
         userMap.put(1L, 1L);

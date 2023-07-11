@@ -1,7 +1,10 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Disease;
 import org.ensembl.importer.repositories.DiseaseRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,19 +16,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
+@Configuration
 @RestController
 @RequestMapping("/api/diseases")
 public class DiseaseController {
 
     private final DiseaseRepository diseaseRepository;
-    private RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
 
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    public DiseaseController(DiseaseRepository diseaseRepository) {
-        this.diseaseRepository = diseaseRepository;
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     @GetMapping
@@ -34,7 +36,7 @@ public class DiseaseController {
 
         // Define the URL of the external API from which to retrieve disease data
         String apiUrl = "http://localhost:8082/api/diseases";
-
+        RestTemplate restTemplate = restTemplate();
         // Make a GET request to the external API and retrieve the response as ResponseEntity
         ResponseEntity<Disease[]> response = restTemplate.getForEntity(apiUrl, Disease[].class);
 

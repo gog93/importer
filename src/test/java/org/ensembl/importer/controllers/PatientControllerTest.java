@@ -46,13 +46,12 @@ class PatientControllerTest extends TestHelper {
 
     private PatientController patientController;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-        patientController = new PatientController(patientRepository, userController, studyController, familyController,
-                diseaseController, userRepository, fileUploadRepository, studyRepository, familyRepository, diseaseRepository);
-        patientController.setRestTemplate(restTemplate); // Inject the mocked RestTemplate
-    }
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.initMocks(this);
+//        patientController = new PatientController(patientRepository, userController, studyController, familyController,
+//                diseaseController, restTemplate,userRepository, fileUploadRepository, studyRepository, familyRepository, diseaseRepository);
+//    }
 
 
     @Test

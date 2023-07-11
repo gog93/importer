@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Study;
 import org.ensembl.importer.entities.User;
 import org.ensembl.importer.repositories.StudyRepository;
@@ -17,22 +18,18 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/studies")
 public class StudyController {
 
     private final UserRepository userRepository;
 
-  private   RestTemplate restTemplate;
+  private   final RestTemplate restTemplate;
 
     private final UserController userController;
     private final StudyRepository studyRepository;
 
-    @Autowired
-    public StudyController(UserRepository userRepository, UserController userController, StudyRepository studyRepository) {
-        this.userRepository = userRepository;
-        this.userController = userController;
-        this.studyRepository = studyRepository;
-    }
+
 
     @GetMapping
     public List<Study> getAllStudies() {
@@ -108,9 +105,7 @@ public class StudyController {
         }
     }
 
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+
 }
 
 

@@ -32,7 +32,6 @@ class DiseaseControllerTest extends TestHelper {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         diseaseController = new DiseaseController(diseaseRepository);
-        diseaseController.setRestTemplate(restTemplate);
     }
 
     @Test
@@ -48,7 +47,6 @@ class DiseaseControllerTest extends TestHelper {
         when(restTemplate.getForEntity(anyString(), any(Class.class))).thenReturn(responseEntity);
 
         // Set the mock RestTemplate in the diseaseController
-        diseaseController.setRestTemplate(restTemplate);
 
         // Invoke the method
         List<Disease> diseasesList = diseaseController.getAllDiseases();
@@ -75,12 +73,13 @@ class DiseaseControllerTest extends TestHelper {
 
         // Mock behavior of other controller methods
         when(diseaseRepository.findAll()).thenReturn(patientsFromDB);
-        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
-
         // Mock repository methods
         when(diseaseRepository.findById(anyLong())).thenReturn(Optional.of(disease())); // <-- Mock with a valid FileUpload
         when(diseaseRepository.findById(anyLong())).thenReturn(Optional.of(disease())); // <-- Mock with a valid FileUpload
         when(diseaseRepository.save(any(Disease.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
+
 
         // Invoke the method
         Map<Long, Long> actualPatientsMap = diseaseController.processDiseaseChanges();

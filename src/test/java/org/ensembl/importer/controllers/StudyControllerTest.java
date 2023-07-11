@@ -33,12 +33,11 @@ class StudyControllerTest extends TestHelper {
     private StudyRepository studyRepository;
     private StudyController studyController;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-        studyController = new StudyController(userRepository, userController, studyRepository);
-        studyController.setRestTemplate(restTemplate);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.initMocks(this);
+//        studyController = new StudyController(userRepository, userController, studyRepository,restTemplate);
+//    }
 
     @Test
     void getAllStudies() {

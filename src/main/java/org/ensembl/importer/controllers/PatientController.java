@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.*;
 import org.ensembl.importer.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/patients")
+@RequiredArgsConstructor
 public class PatientController {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     private final PatientRepository patientRepository;
     private final UserController userController;
     private FileUploadController fileUploadController;
@@ -29,30 +31,6 @@ public class PatientController {
     private final StudyRepository studyRepository;
     private final FamilyRepository familyRepository;
     private final DiseaseRepository diseaseRepository;
-
-    @Autowired
-    public PatientController(PatientRepository patientRepository,
-                             UserController userController,
-                             StudyController studyController,
-                             FamilyController familyController,
-                             DiseaseController diseaseController,
-                             UserRepository userRepository,
-                             FileUploadRepository fileUploadRepository,
-                             StudyRepository studyRepository,
-                             FamilyRepository familyRepository,
-                             DiseaseRepository diseaseRepository) {
-        this.patientRepository = patientRepository;
-        this.userController = userController;
-        this.fileUploadController = fileUploadController;
-        this.studyController = studyController;
-        this.familyController = familyController;
-        this.diseaseController = diseaseController;
-        this.userRepository = userRepository;
-        this.fileUploadRepository = fileUploadRepository;
-        this.studyRepository = studyRepository;
-        this.familyRepository = familyRepository;
-        this.diseaseRepository = diseaseRepository;
-    }
 
     @GetMapping
     public List<Patient> getAllPatients() {
@@ -129,9 +107,6 @@ public class PatientController {
         }
     }
 
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     public void setFileUploadController(FileUploadController fileUploadController) {
         this.fileUploadController = fileUploadController;
