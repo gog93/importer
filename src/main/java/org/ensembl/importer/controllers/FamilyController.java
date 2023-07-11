@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -91,7 +92,7 @@ public class FamilyController {
                 }
             }
             if (!found) {
-
+family.setUpdatedAt(LocalDateTime.now());
                 familyRepository.save(family);
                 familiesMap.put(family.getId(), family.getId());
             }

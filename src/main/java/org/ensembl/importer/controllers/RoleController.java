@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +87,7 @@ public class RoleController {
                 }
             }
             if (!found) {
+                role.setUpdatedAt(LocalDate.now());
                 roleRepository.save(role);
                 rolesMap.put(role.getId(), role.getId());
             }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +100,7 @@ public class UserController {
                 Integer aLong = integerIntegerMap.get(user.getRole().getId());
                 Role byId = roleRepository.findById(aLong).get();
                 user.setRole(byId);
+                user.setUpdatedAt(Timestamp.from(Instant.now()));
                 userRepository.save(user);
                 usersMap.put(user.getId(), user.getId());
             }

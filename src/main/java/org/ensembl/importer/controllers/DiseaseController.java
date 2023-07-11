@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +33,7 @@ public class DiseaseController {
 
     @GetMapping
     public List<Disease> getAllDiseases() {
-        // Create a RestTemplate object to make HTTP requests
 
-        // Define the URL of the external API from which to retrieve disease data
         String apiUrl = "http://localhost:8082/api/diseases";
         RestTemplate restTemplate = restTemplate();
         // Make a GET request to the external API and retrieve the response as ResponseEntity
@@ -49,7 +48,17 @@ public class DiseaseController {
         // Return the list of diseases
         return diseasesList;
     }
+    public String checkTwoTables() {
+        List<Disease> diseasesFromDB = diseaseRepository.findAll();
 
+        // Retrieve the list of diseases from the external API
+        List<Disease> diseasesList = getAllDiseases();
+        if (!diseasesFromDB.containsAll(diseasesList)) {
+            processDiseaseChanges();
+            return "uncheck";
+        }
+        return "checked";
+    }
     @GetMapping("/process-changes")
     public Map<Long, Long> processDiseaseChanges() {
         // Read diseases from the database
@@ -96,6 +105,7 @@ public class DiseaseController {
                 Disease parentDisease = diseaseRepository.findById(parentId).orElse(null);
                 if (parentDisease != null) {
                     disease.setParent(parentDisease);
+                    disease.setUpdatedAt(LocalDateTime.now());
                     diseaseRepository.save(disease);
                     diseasesMap.put(disease.getId(), disease.getId());
                 }

@@ -70,7 +70,7 @@ public class SymptomController {
     }
 
     private void saveNewSymptoms(List<Symptom> symptomsList, List<Symptom> symptomsFromDB, Map<Long, Long> symptomssMap) {
-        for (Symptom symptom : symptomsFromDB) {
+        for (Symptom symptom : symptomsList) {
             boolean found = false;
             for (Symptom symptomFromDB : symptomsFromDB) {
                 if (symptom.getName().equals(symptomFromDB.getName())) {

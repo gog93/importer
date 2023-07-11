@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -110,6 +111,7 @@ public class SequenceVariationController {
                 Patient byIdPatient = patientRepository.findById(patientById).get();
                 sequenceVariation.setGene(byIdGen);
                 sequenceVariation.setPatient(byIdPatient);
+                sequenceVariation.setUpdatedAt(LocalDateTime.now());
                 sequenceVariationRepository.save(sequenceVariation);
                 sequenceVariationsMap.put(sequenceVariation.getId(), sequenceVariation.getId());
             }

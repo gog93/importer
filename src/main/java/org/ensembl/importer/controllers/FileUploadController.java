@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +88,7 @@ public class FileUploadController {
                 Long aStudy = studyMap.get(fileUpload.getStudy().getId());
                 Study byIdStudy = studyRepository.findById(aStudy).get();
                 fileUpload.setStudy(byIdStudy);
+                fileUpload.setUpdatedAt(LocalDateTime.now());
                 fileUploadRepository.save(fileUpload);
                 fileUploadsMap.put(fileUpload.getId(), fileUpload.getId());
             }

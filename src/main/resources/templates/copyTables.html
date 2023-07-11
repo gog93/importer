@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<a href="/copyTables/disease">Disease</a>  <div th:if="${checked}!= null" class="error">
+    <p th:text="${checked}"></p>
+</div>
+</div>
+<div>
+
+<a href="/copyTables/family">Family</a>  <div th:if="${checkedFamily}!= null" class="error">
+    <p th:text="${checkedFamily}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/fileUpload">FileUpload</a>  <div th:if="${checkedFileUpload}!= null" class="error">
+    <p th:text="${checkedFileUpload}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/gene">Gene</a>  <div th:if="${checkedGene}!= null" class="error">
+    <p th:text="${checkedGene}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/meta-analyses">Meta-analyses</a>  <div th:if="${checkedMetaAnalyses}!= null" class="error">
+    <p th:text="${checkedMetaAnalyses}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/meta-study-relations">Meta-study-relations</a>  <div th:if="${checkedMetaStudyRelations}!= null" class="error">
+    <p th:text="${checkedMetaStudyRelations}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/patient">Patient</a>  <div th:if="${checkedPatient}!= null" class="error">
+    <p th:text="${checkedPatient}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/patientsSymptoms">PatientsSymptoms</a>  <div th:if="${checkedPatientsSymptoms}!= null" class="error">
+    <p th:text="${checkedPatientsSymptoms}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/role">Role</a>  <div th:if="${checkedRole}!= null" class="error">
+    <p th:text="${checkedRole}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/sequenceVariations">SequenceVariations</a>  <div th:if="${checkedSequenceVariations}!= null" class="error">
+    <p th:text="${checkedSequenceVariations}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/study">Study</a>  <div th:if="${checkedStudy}!= null" class="error">
+    <p th:text="${checkedStudy}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/symptom">Symptom</a>  <div th:if="${checkedSymptom}!= null" class="error">
+    <p th:text="${checkedSymptom}"></p>
+</div>
+</div>
+<div>
+<a href="/copyTables/user">User</a>  <div th:if="${checkedUser}!= null" class="error">
+    <p th:text="${checkedUser}"></p>
+</div>
+</div>
+</body>
+</html>

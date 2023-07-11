@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -99,8 +100,10 @@ public class PatientController {
                 patient.setFamily(byIdFamily);
                 patient.setCreatedBy(byIdUser);
                 patient.setUpdatedBy(byIdUser);
+                patient.setUpdatedAt(LocalDateTime.now());
                 patient.setVerifiedBy(byIdUser);
                 patient.setDisease(byIdDisease);
+                patient.setUpdatedAt(LocalDateTime.now());
                 patientRepository.save(patient);
                 patientsMap.put(patient.getId(), patient.getId());
             }

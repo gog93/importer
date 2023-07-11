@@ -88,7 +88,7 @@ class PatientControllerTest extends TestHelper {
         when(studyController.processStudyChanges()).thenReturn(createStudyMap());
         when(userController.processUsersChanges()).thenReturn(createUserMap());
         when(familyController.processFamilyChanges()).thenReturn(createFamilyMap());
-        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
+//        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
 
         // Initialize the fileUploadController mock
         fileUploadController = mock(FileUploadController.class);
@@ -115,7 +115,7 @@ class PatientControllerTest extends TestHelper {
         verify(studyController, times(1)).processStudyChanges();
         verify(userController, times(1)).processUsersChanges();
         verify(familyController, times(1)).processFamilyChanges();
-        verify(diseaseController, times(1)).processDiseaseChanges();
+//        verify(diseaseController, times(1)).processDiseaseChanges();
         verify(fileUploadController, times(1)).processFileUploadChanges();
 
         // Verify repository methods

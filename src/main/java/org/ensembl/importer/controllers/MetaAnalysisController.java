@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -97,6 +98,7 @@ public class MetaAnalysisController {
                 User byId = userRepository.findById(aLong).get();
                 metaAnalyses.setUpdatedBy(byId);
                 metaAnalyses.setCreatedBy(byId);
+                metaAnalyses.setUpdatedAt(LocalDateTime.now());
                 metaAnalysisRepository.save(metaAnalyses);
                 metaAnalysesMap.put(metaAnalyses.getId(), metaAnalyses.getId());
             }

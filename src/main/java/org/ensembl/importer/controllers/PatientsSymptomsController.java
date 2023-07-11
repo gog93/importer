@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -108,6 +109,7 @@ public class PatientsSymptomsController {
                 Symptom byIdSymptom = symptomRepository.findById(id).get();
                 patientsSymptoms.setPatient(byId);
                 patientsSymptoms.setSymptom(byIdSymptom);
+                patientsSymptoms.setUpdatedAt(LocalDateTime.now());
                 patientSymptomRepository.save(patientsSymptoms);
                 patientsMap.put(patientsSymptoms.getId(), patientsSymptoms.getId());
             }
