@@ -1,10 +1,8 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Family;
-import org.ensembl.importer.entities.MetaAnalysis;
-import org.ensembl.importer.entities.Study;
 import org.ensembl.importer.repositories.FamilyRepository;
-import org.ensembl.importer.repositories.StudyRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,25 +17,17 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/families")
+@RequiredArgsConstructor
 public class FamilyController {
 
     private final FamilyRepository familyRepository;
+    private final RestTemplate restTemplate;
 
-
-    public FamilyController(FamilyRepository familyRepository) {
-        this.familyRepository = familyRepository;
-
-    }
 
     @GetMapping
     public List<Family> getAllFamilies() {
-        // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
-        // Define the URL of the external API from which to retrieve family data
         String apiUrl = "http://localhost:8082/api/families";
-
-        // Make a GET request to the external API and retrieve the response as ResponseEntity
         ResponseEntity<Family[]> response = restTemplate.getForEntity(apiUrl, Family[].class);
 
         // Extract the array of Family objects from the response body
@@ -92,7 +82,7 @@ public class FamilyController {
                 }
             }
             if (!found) {
-family.setUpdatedAt(LocalDateTime.now());
+                family.setUpdatedAt(LocalDateTime.now());
                 familyRepository.save(family);
                 familiesMap.put(family.getId(), family.getId());
             }

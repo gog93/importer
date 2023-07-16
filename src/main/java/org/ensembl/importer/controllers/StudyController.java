@@ -5,7 +5,6 @@ import org.ensembl.importer.entities.Study;
 import org.ensembl.importer.entities.User;
 import org.ensembl.importer.repositories.StudyRepository;
 import org.ensembl.importer.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +23,9 @@ import java.util.Map;
 public class StudyController {
 
     private final UserRepository userRepository;
-
-  private   final RestTemplate restTemplate;
-
+    private final RestTemplate restTemplate;
     private final UserController userController;
     private final StudyRepository studyRepository;
-
 
 
     @GetMapping

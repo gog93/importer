@@ -1,6 +1,7 @@
 package org.ensembl.importer.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.config.RestTemplateConfig;
 import org.ensembl.importer.entities.Disease;
 import org.ensembl.importer.repositories.DiseaseRepository;
 import org.springframework.context.annotation.Bean;
@@ -30,14 +31,13 @@ public class DiseaseController {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
     @GetMapping
     public List<Disease> getAllDiseases() {
 
         String apiUrl = "http://localhost:8082/api/diseases";
         RestTemplate restTemplate = restTemplate();
-        // Make a GET request to the external API and retrieve the response as ResponseEntity
-        ResponseEntity<Disease[]> response = restTemplate.getForEntity(apiUrl, Disease[].class);
+
+        ResponseEntity<Disease[]> response =restTemplate.getForEntity(apiUrl, Disease[].class);
 
         // Extract the array of Disease objects from the response body
         Disease[] diseasesArray = response.getBody();
@@ -48,6 +48,7 @@ public class DiseaseController {
         // Return the list of diseases
         return diseasesList;
     }
+
     public String checkTwoTables() {
         List<Disease> diseasesFromDB = diseaseRepository.findAll();
 
@@ -59,6 +60,7 @@ public class DiseaseController {
         }
         return "checked";
     }
+
     @GetMapping("/process-changes")
     public Map<Long, Long> processDiseaseChanges() {
         // Read diseases from the database

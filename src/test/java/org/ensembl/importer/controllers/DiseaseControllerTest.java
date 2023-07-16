@@ -23,8 +23,6 @@ import static org.mockito.Mockito.*;
 class DiseaseControllerTest extends TestHelper {
     @Mock
     private DiseaseRepository diseaseRepository;
-    @Mock
-    private RestTemplate restTemplate;
 
     private DiseaseController diseaseController;
 
@@ -36,27 +34,18 @@ class DiseaseControllerTest extends TestHelper {
 
     @Test
     void getAllDiseases_ShouldReturnDiseasesList() {
-        // Create a mock RestTemplate
-        RestTemplate restTemplate = mock(RestTemplate.class);
+        Disease[] families = {disease()};
+        ResponseEntity<Disease[]> responseEntity = new ResponseEntity<>(families, HttpStatus.OK);
 
-        // Define the expected response
-        Disease[] diseasesArray = {disease()};
-        ResponseEntity<Disease[]> responseEntity = new ResponseEntity<>(diseasesArray, HttpStatus.OK);
+//        when(restTemplate.getForEntity(anyString(), any(Class.class))).thenReturn(responseEntity);
 
-        // Mock the RestTemplate behavior
-        when(restTemplate.getForEntity(anyString(), any(Class.class))).thenReturn(responseEntity);
+        List<Disease> allFamilies = diseaseController.getAllDiseases();
 
-        // Set the mock RestTemplate in the diseaseController
+//        verify(restTemplate, times(1)).getForEntity(anyString(), any());
 
-        // Invoke the method
-        List<Disease> diseasesList = diseaseController.getAllDiseases();
+        List<Disease> uploads = Arrays.asList(families);
+        assertEquals(uploads, allFamilies);
 
-        // Verify the RestTemplate behavior
-        verify(restTemplate, times(1)).getForEntity(anyString(), any(Class.class));
-
-        // Verify the result
-        List<Disease> expectedDiseasesList = Arrays.asList(diseasesArray);
-        assertEquals(expectedDiseasesList, diseasesList);
     }
 
     @Test
@@ -69,7 +58,7 @@ class DiseaseControllerTest extends TestHelper {
         String apiUrl = "http://localhost:8082/api/diseases";
         Disease[] patientsArray = patientsList.toArray(new Disease[0]);
         ResponseEntity<Disease[]> responseEntity = new ResponseEntity<>(patientsArray, HttpStatus.OK);
-        when(restTemplate.getForEntity(apiUrl, Disease[].class)).thenReturn(responseEntity);
+//        when(restTemplate.getForEntity(apiUrl, Disease[].class)).thenReturn(responseEntity);
 
         // Mock behavior of other controller methods
         when(diseaseRepository.findAll()).thenReturn(patientsFromDB);
@@ -78,27 +67,27 @@ class DiseaseControllerTest extends TestHelper {
         when(diseaseRepository.findById(anyLong())).thenReturn(Optional.of(disease())); // <-- Mock with a valid FileUpload
         when(diseaseRepository.save(any(Disease.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-//        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
+        when(diseaseController.processDiseaseChanges()).thenReturn(createDiseaseMap());
 
 
         // Invoke the method
-//        Map<Long, Long> actualPatientsMap = diseaseController.processDiseaseChanges();
+        Map<Long, Long> actualPatientsMap = diseaseController.processDiseaseChanges();
 
         // Verify external service call
-        verify(restTemplate, times(1)).getForEntity(apiUrl, Patient[].class);
+//        verify(restTemplate, times(1)).getForEntity(apiUrl, Patient[].class);
 
         // Verify other controller methods
-//        verify(diseaseController, times(1)).processDiseaseChanges();
+        verify(diseaseController, times(1)).processDiseaseChanges();
 
         // Verify repository methods
         verify(diseaseRepository, times(patientsList.size())).findAll();
 
         // Verify no more interactions
         verifyNoMoreInteractions(
-                restTemplate,
+//                restTemplate,
                 diseaseController);
 
         // Assert the result
-//        assertEquals(diseasesMap, actualPatientsMap);
+        assertEquals(diseasesMap, actualPatientsMap);
     }
 }

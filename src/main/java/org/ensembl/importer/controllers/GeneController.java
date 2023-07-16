@@ -1,6 +1,7 @@
 package org.ensembl.importer.controllers;
 
-import org.ensembl.importer.entities.*;
+import lombok.RequiredArgsConstructor;
+import org.ensembl.importer.entities.Gene;
 import org.ensembl.importer.repositories.GeneRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/genes")
 public class GeneController {
 
     private final GeneRepository geneRepository;
+    private final RestTemplate restTemplate;
 
-    public GeneController(GeneRepository geneRepository) {
-        this.geneRepository = geneRepository;
-    }
 
     @GetMapping
     public List<Gene> getAllGenes() {
-        // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
-
-        // Define the URL of the external API from which to retrieve gene data
         String apiUrl = "http://localhost:8082/api/genes";
 
         // Make a GET request to the external API and retrieve the response as ResponseEntity

@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.MetaAnalysis;
 import org.ensembl.importer.entities.User;
 import org.ensembl.importer.repositories.MetaAnalysisRepository;
@@ -13,28 +14,19 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.*;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/meta-analyses")
 public class MetaAnalysisController {
 
     private final MetaAnalysisRepository metaAnalysisRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserController userController;
+    private final UserRepository userRepository;
+    private final UserController userController;
+   private final RestTemplate restTemplate;
 
-
-
-    @Autowired
-    public MetaAnalysisController(MetaAnalysisRepository metaAnalysisRepository) {
-        this.metaAnalysisRepository = metaAnalysisRepository;
-    }
 
     @GetMapping
     public List<MetaAnalysis> getAllMetaAnalyses() {
-        // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve meta-analysis data
         String apiUrl = "http://localhost:8082/api/meta-analyses";

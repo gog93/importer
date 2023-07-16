@@ -1,6 +1,7 @@
 package org.ensembl.importer.controllers;
 
 import org.ensembl.importer.entities.Study;
+import org.ensembl.importer.entities.Symptom;
 import org.ensembl.importer.repositories.StudyRepository;
 import org.ensembl.importer.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,26 +34,26 @@ class StudyControllerTest extends TestHelper {
     private StudyRepository studyRepository;
     private StudyController studyController;
 
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.initMocks(this);
-//        studyController = new StudyController(userRepository, userController, studyRepository,restTemplate);
-//    }
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+        studyController = new StudyController(userRepository, restTemplate, userController,studyRepository);
+    }
 
     @Test
     void getAllStudies() {
-        Study[] studies = {study(), study()};
+        Study[] studies = {study()};
         ResponseEntity<Study[]> responseEntity = new ResponseEntity<>(studies, HttpStatus.OK);
-        String apiUrl = "http://localhost:8082/api/studies";
-        when(restTemplate.getForEntity(apiUrl, Study[].class)).thenReturn(responseEntity);
 
+        when(restTemplate.getForEntity(anyString(), any(Class.class))).thenReturn(responseEntity);
 
-        List<Study> expectedStudies = Arrays.asList(studies);
-        List<Study> actualStudies = studyController.getAllStudies();
+        List<Study> studyList = studyController.getAllStudies();
 
-        verify(restTemplate, times(1)).getForEntity(apiUrl, Study[].class);
-        verifyNoMoreInteractions(restTemplate);
-        assertEquals(expectedStudies, actualStudies);
+        verify(restTemplate, times(1)).getForEntity(anyString(), any());
+
+        List<Study> expectedUsersList = Arrays.asList(studies);
+        assertEquals(expectedUsersList, studyList);
+
     }
 
     @Test

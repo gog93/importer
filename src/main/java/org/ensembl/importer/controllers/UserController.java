@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Role;
 import org.ensembl.importer.entities.User;
 import org.ensembl.importer.repositories.RoleRepository;
@@ -18,24 +19,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final RestTemplate restTemplate;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final RoleController roleController;
 
-    public UserController(UserRepository userRepository, RoleController roleController, RoleRepository roleRepository) {
-
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-        this.roleController = roleController;
-    }
 
     @GetMapping
     public List<User> getAllUsers() {
         // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve disease data
         String apiUrl = "http://localhost:8082/api/users";

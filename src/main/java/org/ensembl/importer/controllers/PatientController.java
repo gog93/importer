@@ -23,7 +23,7 @@ public class PatientController {
     private final RestTemplate restTemplate;
     private final PatientRepository patientRepository;
     private final UserController userController;
-    private FileUploadController fileUploadController;
+    private final FileUploadController fileUploadController;
     private final StudyController studyController;
     private final FamilyController familyController;
     private final DiseaseController diseaseController;
@@ -110,8 +110,4 @@ public class PatientController {
         }
     }
 
-
-    public void setFileUploadController(FileUploadController fileUploadController) {
-        this.fileUploadController = fileUploadController;
-    }
 }

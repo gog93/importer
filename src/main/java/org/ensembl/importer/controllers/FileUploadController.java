@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.FileUpload;
 import org.ensembl.importer.entities.Study;
 import org.ensembl.importer.repositories.FileUploadRepository;
@@ -18,22 +19,17 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/fileUpload")
-
+@RequiredArgsConstructor
 public class FileUploadController {
     private final FileUploadRepository fileUploadRepository;
     private final StudyController studyController;
     private final StudyRepository studyRepository;
 
-    public FileUploadController(FileUploadRepository fileUploadRepository, StudyController studyController, StudyRepository studyRepository) {
-        this.fileUploadRepository = fileUploadRepository;
-        this.studyController = studyController;
-        this.studyRepository = studyRepository;
-    }
+    private final RestTemplate restTemplate;
+
 
     @GetMapping
     public List<FileUpload> getAllFileUploads() {
-        // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         String apiUrl = "http://localhost:8082/api/file-uploads";
 

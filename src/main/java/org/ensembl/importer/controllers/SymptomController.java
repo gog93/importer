@@ -1,8 +1,8 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Symptom;
 import org.ensembl.importer.repositories.SymptomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,22 +14,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/symptoms")
 public class SymptomController {
 
     private final SymptomRepository symptomRepository;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    public SymptomController(SymptomRepository symptomRepository) {
-
-        this.symptomRepository = symptomRepository;
-    }
 
     @GetMapping
     public List<Symptom> getAllSymptoms() {
         // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve patient symptom data
         String apiUrl = "http://localhost:8082/api/symptoms";

@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Gene;
 import org.ensembl.importer.entities.Patient;
 import org.ensembl.importer.entities.SequenceVariation;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/sequence-variations")
 public class SequenceVariationController {
@@ -27,20 +28,11 @@ public class SequenceVariationController {
     private final GeneRepository geneRepository;
     private final PatientRepository patientRepository;
     private final SequenceVariationRepository sequenceVariationRepository;
+   private final RestTemplate restTemplate;
 
-    @Autowired
-    public SequenceVariationController(GeneController geneController, PatientController patientController, GeneRepository geneRepository, PatientRepository patientRepository, SequenceVariationRepository sequenceVariationRepository) {
-        this.geneController = geneController;
-        this.patientController = patientController;
-        this.geneRepository = geneRepository;
-        this.patientRepository = patientRepository;
-        this.sequenceVariationRepository = sequenceVariationRepository;
-    }
 
     @GetMapping
     public List<SequenceVariation> getAllSequenceVariations() {
-        // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve sequence variation data
         String apiUrl = "http://localhost:8082/api/sequence-variations";

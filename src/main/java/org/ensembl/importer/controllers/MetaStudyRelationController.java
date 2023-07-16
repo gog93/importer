@@ -1,5 +1,6 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.MetaAnalysis;
 import org.ensembl.importer.entities.MetaStudyRelation;
 import org.ensembl.importer.entities.Study;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/meta-study-relations")
+@RequiredArgsConstructor
 public class MetaStudyRelationController {
 
     private final MetaStudyRelationRepository metaStudyRelationRepository;
@@ -27,20 +29,12 @@ public class MetaStudyRelationController {
     private final MetaAnalysisRepository metaAnalysisRepository;
     private final StudyController studyController;
     private final MetaAnalysisController metaAnalysisController;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    public MetaStudyRelationController(MetaStudyRelationRepository metaStudyRelationRepository, StudyRepository studyRepository, MetaAnalysisRepository metaAnalysisRepository, StudyController studyController, MetaAnalysisController metaAnalysisController) {
-        this.metaStudyRelationRepository = metaStudyRelationRepository;
-        this.studyRepository = studyRepository;
-        this.metaAnalysisRepository = metaAnalysisRepository;
-        this.studyController = studyController;
-        this.metaAnalysisController = metaAnalysisController;
-    }
 
     @GetMapping
     public List<MetaStudyRelation> getAllMetaStudyRelations() {
         // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve meta-study relation data
         String apiUrl = "http://localhost:8082/api/meta-study-relations";

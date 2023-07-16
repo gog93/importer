@@ -1,12 +1,12 @@
 package org.ensembl.importer.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.ensembl.importer.entities.Patient;
 import org.ensembl.importer.entities.PatientsSymptoms;
 import org.ensembl.importer.entities.Symptom;
 import org.ensembl.importer.repositories.PatientRepository;
 import org.ensembl.importer.repositories.PatientsSymptomsRepository;
 import org.ensembl.importer.repositories.SymptomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,32 +20,20 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/patients-symptoms")
 public class PatientsSymptomsController {
     private final PatientController patientController;
     private final SymptomController symptomController;
     private final PatientRepository patientRepository;
     private final SymptomRepository symptomRepository;
-
+    private final RestTemplate restTemplate;
     private final PatientsSymptomsRepository patientSymptomRepository;
 
-    @Autowired
-    public PatientsSymptomsController(PatientController patientController,
-                                      SymptomController symptomController,
-                                      PatientRepository patientRepository,
-                                      SymptomRepository symptomRepository,
-                                      PatientsSymptomsRepository patientSymptomRepository) {
-        this.patientController = patientController;
-        this.symptomController = symptomController;
-        this.patientRepository = patientRepository;
-        this.symptomRepository = symptomRepository;
-        this.patientSymptomRepository = patientSymptomRepository;
-    }
 
     @GetMapping
     public List<PatientsSymptoms> getAllPatientSymptoms() {
         // Create a RestTemplate object to make HTTP requests
-        RestTemplate restTemplate = new RestTemplate();
 
         // Define the URL of the external API from which to retrieve patient symptom data
         String apiUrl = "http://localhost:8082/api/patients-symptoms";
@@ -105,8 +93,9 @@ public class PatientsSymptomsController {
                 Map<Long, Long> patientMap = patientController.processPatientChanges();
                 Long id = symptomMap.get(patientsSymptoms.getSymptom().getId());
                 Long idByPatient = patientMap.get(patientsSymptoms.getPatient().getId());
-                Patient byId = patientRepository.findById(idByPatient).get();
-                Symptom byIdSymptom = symptomRepository.findById(id).get();
+                Patient byId = patientRepository.findById(idByPatient).orElse(null);
+                Symptom byIdSymptom = symptomRepository.findById(id).orElse(null);
+
                 patientsSymptoms.setPatient(byId);
                 patientsSymptoms.setSymptom(byIdSymptom);
                 patientsSymptoms.setUpdatedAt(LocalDateTime.now());
