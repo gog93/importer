@@ -152,7 +152,7 @@ public class CopyController {
                 if (!roleMap.containsValue(value)) {
                     roleMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in roleMap");
                 }
 
             }
@@ -172,7 +172,7 @@ public class CopyController {
                 if (!familyMap.containsValue(value)) {
                     familyMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in familyMap");
                 }
 
             }
@@ -192,7 +192,7 @@ public class CopyController {
                 if (!patientMap.containsValue(value)) {
                     patientMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in patientMap");
                 }
 
             }
@@ -212,7 +212,7 @@ public class CopyController {
                 if (!metaAnalysesMap.containsValue(value)) {
                     metaAnalysesMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in meta-analysesMap");
                 }
 
             }
@@ -232,7 +232,7 @@ public class CopyController {
                 if (!fileUploadMap.containsValue(value)) {
                     fileUploadMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in fileUploadMap");
                 }
 
             }
@@ -252,7 +252,7 @@ public class CopyController {
                 if (!metaStudyRelation.containsValue(value)) {
                     metaStudyRelation.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in meta-study-relationsMap");
                 }
 
             }
@@ -272,7 +272,7 @@ public class CopyController {
                 if (!patientsSymptomsMap.containsValue(value)) {
                     patientsSymptomsMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in patientSymptomsMap");
                 }
 
             }
@@ -292,7 +292,7 @@ public class CopyController {
                 if (!geneMap.containsValue(value)) {
                     geneMap.put(key, value);
                     // Key does not exist in diseaseMap
-                    System.out.println("Key " + key + " does not exist in diseaseMap");
+                    System.out.println("Key " + key + " does not exist in geneMap");
                 }
 
             }
